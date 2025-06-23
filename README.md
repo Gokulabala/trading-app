@@ -28,7 +28,9 @@ A beginner-friendly trading application built with **React.js** and **Node.js**.
 ---
  
 ## 📂 Folder Structure (Planned)
-trading-app/
-├── frontend/         # React.js frontend
-├── backend/          # Node.js backend (to be added later)
-└── README.md         # Project documentation
+trading-app/ 
+```
+├── frontend/ # React.js frontend 
+├── backend/ # Node.js backend (to be added later) 
+└── README.md # Project documentation
+```
