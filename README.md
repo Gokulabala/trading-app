@@ -9,6 +9,11 @@ A beginner-friendly trading application built with **React.js** and **Node.js**.
 - Backend API for Authentication (Node.js + Express.js)
 - Protected Routes using PrivateRoute
 - Frontend connected to Backend (Axios)
+- Stock Dashboard:
+  - Search stocks by symbol (e.g., AAPL, TSLA, IBM)
+  - Select dynamic time intervals (e.g., 1min, 5min, 15min)
+  - Display stock data (open, high, low, close, volume, percentage change)
+  - Error handling for invalid symbols or API issues
  
 ---
  
@@ -17,7 +22,7 @@ A beginner-friendly trading application built with **React.js** and **Node.js**.
 - **Backend**: Node.js, Express.js
 - **Database**: Mock data (for now)
 - **Styling**: Material-UI / Tailwind CSS (optional for future)
-- **APIs**: Alpha Vantage / Finnhub (for stock data, to be added)
+- **APIs**: Alpha Vantage (for stock data)
 - **Deployment**: Netlify (Frontend), Render or Heroku (Backend)
  
 ---
