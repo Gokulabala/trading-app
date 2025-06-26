@@ -4,31 +4,26 @@ A beginner-friendly trading application built with **React.js** and **Node.js**.
  
 ---
  
-## 🚀 Features (Planned)
+## 🚀 Features (Implemented)
 - User Authentication (Login, Register, Logout)
-- Live Stock Dashboard with Search
-- Stock Details Page with Charts
-- Trading System (Buy/Sell with Virtual Money)
-- Portfolio Management
-- Watchlist for Tracking Stocks
-- Real-Time Stock Updates
-- Alerts for Stock Prices
-- Responsive Design
+- Backend API for Authentication (Node.js + Express.js)
+- Protected Routes using PrivateRoute
+- Frontend connected to Backend (Axios)
  
 ---
  
 ## 🛠️ Tech Stack
-- **Frontend**: React.js, React Router, Axios
+- **Frontend**: React.js, React Router, Axios, Formik, Yup
 - **Backend**: Node.js, Express.js
-- **Database**: MongoDB
-- **Styling**: Material-UI / Tailwind CSS
-- **APIs**: Alpha Vantage / Finnhub for stock data
-- **Deployment**: Netlify (Frontend), Render (Backend)
+- **Database**: Mock data (for now)
+- **Styling**: Material-UI / Tailwind CSS (optional for future)
+- **APIs**: Alpha Vantage / Finnhub (for stock data, to be added)
+- **Deployment**: Netlify (Frontend), Render or Heroku (Backend)
  
 ---
  
-## 📂 Folder Structure (Planned)
-trading-app/ 
+## 📂 Folder Structure
+trading-app/
 ```
-├── frontend/ # React.js frontend │ ├── public/ # Public assets (auto-created by create-react-app) │ ├── src/ # Source code for the React app │ │ ├── assets/ # Static files like images and styles │ │ ├── components/ # Reusable React components (e.g., Navbar, Footer) │ │ ├── context/ # Context API for global state management (optional) │ │ ├── pages/ # Pages (e.g., Login, Register, Dashboard) │ │ ├── services/ # API calls (e.g., stock data, user authentication) │ │ ├── styles.css # Global styles │ │ ├── App.js # Main React app file │ │ └── index.js # Entry point for the React app ├── backend/ # Node.js backend (to be added later) └── README.md # Project documentation
+    ├── frontend/ # React.js frontend │ ├── public/ # Public assets (auto-created by create-react-app) │ ├── src/ # Source code for the React app │ │ ├── assets/ # Static files like images and styles │ │ ├── components/ # Reusable React components (e.g., PrivateRoute) │ │ ├── context/ # Context API for global state management │ │ ├── pages/ # Pages (Login, Register, Dashboard) │ │ ├── services/ # API calls (to be added later) │ │ ├── styles.css # Global styles │ │ ├── App.js # Main React app file │ │ └── index.js # Entry point for the React app ├── backend/ # Node.js backend │ ├── index.js # Main server file │ └── package.json # Backend dependencies └── README.md # Project documentation
 ```
