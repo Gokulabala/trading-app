@@ -1,13 +1,12 @@
 import React from "react";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
-import { useContext } from "react";
-import { AuthContext } from "../context/AuthContext";
- 
+import { useNavigate } from "react-router-dom"; // Import useNavigate
+import axios from "axios";
+
 const Register = () => {
-  const { login } = useContext(AuthContext); // Access the login function from AuthContext
- 
-  // Validation schema using Yup
+  const navigate = useNavigate(); // Initialize useNavigate hook
+
   const validationSchema = Yup.object().shape({
     email: Yup.string().email("Invalid email").required("Email is required"),
     password: Yup.string()
@@ -17,49 +16,62 @@ const Register = () => {
       .oneOf([Yup.ref("password"), null], "Passwords must match")
       .required("Confirm password is required"),
   });
- 
-  // Handle form submission
-  const handleSubmit = (values) => {
-    // Simulate user registration
-    const mockUser = { email: values.email }; // Mock user data
-    login(mockUser); // Automatically log in the user after registration
+
+  const handleSubmit = async (values, { setSubmitting, setErrors }) => {
+    try {
+      // Make the API call to register the user
+      await axios.post("http://localhost:5000/api/register", {
+        email: values.email,
+        password: values.password,
+      });
+
+      // Redirect to the Login page after successful registration
+      alert("Registration successful! Redirecting to Login...");
+      navigate("/login"); // Redirect to /login
+    } catch (error) {
+      setErrors({ email: "User already exists" });
+    } finally {
+      setSubmitting(false);
+    }
   };
- 
+
   return (
-<div>
-<h1>Register</h1>
-<Formik
-        initialValues={{ email: "", password: "", confirmPassword: "" }} // Initial form values
-        validationSchema={validationSchema} // Form validation
-        onSubmit={handleSubmit} // Form submission handler
->
-        {({ errors, touched }) => (
-<Form>
-<div>
-<label>Email</label>
-<Field name="email" type="email" />
+    <div>
+      <h1>Register</h1>
+      <Formik
+        initialValues={{ email: "", password: "", confirmPassword: "" }}
+        validationSchema={validationSchema}
+        onSubmit={handleSubmit}
+      >
+        {({ errors, touched, isSubmitting }) => (
+          <Form>
+            <div>
+              <label>Email</label>
+              <Field name="email" type="email" />
               {errors.email && touched.email ? <div>{errors.email}</div> : null}
-</div>
-<div>
-<label>Password</label>
-<Field name="password" type="password" />
+            </div>
+            <div>
+              <label>Password</label>
+              <Field name="password" type="password" />
               {errors.password && touched.password ? (
-<div>{errors.password}</div>
+                <div>{errors.password}</div>
               ) : null}
-</div>
-<div>
-<label>Confirm Password</label>
-<Field name="confirmPassword" type="password" />
+            </div>
+            <div>
+              <label>Confirm Password</label>
+              <Field name="confirmPassword" type="password" />
               {errors.confirmPassword && touched.confirmPassword ? (
-<div>{errors.confirmPassword}</div>
+                <div>{errors.confirmPassword}</div>
               ) : null}
-</div>
-<button type="submit">Register</button>
-</Form>
+            </div>
+            <button type="submit" disabled={isSubmitting}>
+              {isSubmitting ? "Registering..." : "Register"}
+            </button>
+          </Form>
         )}
-</Formik>
-</div>
+      </Formik>
+    </div>
   );
 };
- 
+
 export default Register;
