@@ -30,7 +30,5 @@ A beginner-friendly trading application built with **React.js** and **Node.js**.
 ## 📂 Folder Structure (Planned)
 trading-app/ 
 ```
-├── frontend/ # React.js frontend 
-├── backend/ # Node.js backend (to be added later) 
-└── README.md # Project documentation
+├── frontend/ # React.js frontend │ ├── public/ # Public assets (auto-created by create-react-app) │ ├── src/ # Source code for the React app │ │ ├── assets/ # Static files like images and styles │ │ ├── components/ # Reusable React components (e.g., Navbar, Footer) │ │ ├── context/ # Context API for global state management (optional) │ │ ├── pages/ # Pages (e.g., Login, Register, Dashboard) │ │ ├── services/ # API calls (e.g., stock data, user authentication) │ │ ├── styles.css # Global styles │ │ ├── App.js # Main React app file │ │ └── index.js # Entry point for the React app ├── backend/ # Node.js backend (to be added later) └── README.md # Project documentation
 ```
