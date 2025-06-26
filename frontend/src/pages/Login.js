@@ -1,15 +1,22 @@
 import React from "react";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
+import { useContext } from "react";
+import { AuthContext } from "../context/AuthContext"; // Import AuthContext
 
 const Login = () => {
+  const { login } = useContext(AuthContext); // Access the login function from AuthContext
+
+  // Validation schema using Yup
   const validationSchema = Yup.object().shape({
     email: Yup.string().email("Invalid email").required("Email is required"),
     password: Yup.string().required("Password is required"),
   });
 
+  // Handle form submission
   const handleSubmit = (values) => {
-    console.log("Login Data:", values);
+    const mockUser = { email: values.email }; // Mock user data
+    login(mockUser); // Call the login function
   };
 
   return (
