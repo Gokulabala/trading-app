@@ -1,34 +1,55 @@
-# Trading App (Kite Clone)
- 
-A beginner-friendly trading application built with **React.js** and **Node.js**. This project is designed to simulate a stock trading platform where users can view live stock prices, manage their portfolio, and place virtual buy/sell orders.
- 
+# 📈 Trading App (Zerodha Kite Clone)
+
+A beginner-friendly trading application built with **React.js**, **Node.js**, **MongoDB**, and **JWT Authentication**. This project simulates a stock trading platform where users can view stock data and securely register/login.
+
 ---
- 
-## 🚀 Features (Implemented)
-- User Authentication (Login, Register, Logout)
-- Backend API for Authentication (Node.js + Express.js)
-- Protected Routes using PrivateRoute
-- Frontend connected to Backend (Axios)
-- Stock Dashboard:
-  - Search stocks by symbol (e.g., AAPL, TSLA, IBM)
-  - Select dynamic time intervals (e.g., 1min, 5min, 15min)
-  - Display stock data (open, high, low, close, volume, percentage change)
-  - Error handling for invalid symbols or API issues
- 
+
+## 🚀 Features
+
+### 🔐 Authentication
+- Register new users with hashed passwords
+- Login with JWT-based session handling
+- Persistent user storage in MongoDB
+- Auto-redirect on login/register
+- Secure token-based route protection
+
+### 📊 Stock Dashboard
+- Enter stock symbol and view live market data
+- Fetch data using FlatTrade API or mock backend
+- Display price, change %, and more
+- Error handling for invalid or empty responses
+
 ---
- 
+
 ## 🛠️ Tech Stack
-- **Frontend**: React.js, React Router, Axios, Formik, Yup
-- **Backend**: Node.js, Express.js
-- **Database**: Mock data (for now)
-- **Styling**: Material-UI / Tailwind CSS (optional for future)
-- **APIs**: Alpha Vantage (for stock data)
-- **Deployment**: Netlify (Frontend), Render or Heroku (Backend)
- 
+
+| Layer        | Technology                        |
+|--------------|------------------------------------|
+| Frontend     | React.js, Formik, Yup, Axios       |
+| Backend      | Node.js, Express.js, JWT, bcrypt   |
+| Database     | MongoDB (Mongoose ODM)             |
+| Styling      | CSS (with Tailwind support optional)|
+| Auth         | JSON Web Tokens (JWT)              |
+
 ---
  
 ## 📂 Folder Structure
 trading-app/
 ```
-    ├── frontend/ # React.js frontend │ ├── public/ # Public assets (auto-created by create-react-app) │ ├── src/ # Source code for the React app │ │ ├── assets/ # Static files like images and styles │ │ ├── components/ # Reusable React components (e.g., PrivateRoute) │ │ ├── context/ # Context API for global state management │ │ ├── pages/ # Pages (Login, Register, Dashboard) │ │ ├── services/ # API calls (to be added later) │ │ ├── styles.css # Global styles │ │ ├── App.js # Main React app file │ │ └── index.js # Entry point for the React app ├── backend/ # Node.js backend │ ├── index.js # Main server file │ └── package.json # Backend dependencies └── README.md # Project documentation
+├── backend/
+│ ├── models/ # Mongoose user model
+│ ├── routes/ # Auth + API endpoints
+│ ├── .env # Environment config
+│ ├── index.js # Express server entry
+│ └── package.json
+├── frontend/
+│ ├── public/
+│ └── src/
+│ ├── pages/ # Login, Register, Dashboard
+│ ├── components/ # PrivateRoute, etc.
+│ ├── context/ # AuthContext
+│ ├── App.js
+│ └── index.js
+├── .gitignore
+└── README.md
 ```
