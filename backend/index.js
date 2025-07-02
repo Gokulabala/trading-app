@@ -1,48 +1,39 @@
+// index.js
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
+const mongoose = require("mongoose");
+require("dotenv").config();
+
+// Import route handlers
+const loginRoutes = require("./routes/login");       // POST /api/auth/login
+const registerRoutes = require("./routes/register"); // POST /api/auth/register
+const flattradeRoutes = require("./routes/flattrade"); // Flattrade API endpoints
 
 const app = express();
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 
 // Middleware
-app.use(bodyParser.json());
 app.use(cors());
+app.use(bodyParser.json());
 
-// Mock user data
-const users = [];
-
-// Routes
-app.post("/api/register", (req, res) => {
-  const { email, password } = req.body;
-
-  // Check if user already exists
-  const existingUser = users.find((user) => user.email === email);
-  if (existingUser) {
-    return res.status(400).json({ message: "User already exists" });
-  }
-
-  // Add new user
-  users.push({ email, password });
-  res.status(201).json({ message: "User registered successfully" });
-});
-
-app.post("/api/login", (req, res) => {
-  const { email, password } = req.body;
-
-  // Check if user exists
-  const user = users.find(
-    (user) => user.email === email && user.password === password
+// MongoDB connection
+mongoose
+  .connect(process.env.MONGO_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => console.log("✅ Connected to MongoDB"))
+  .catch((err) =>
+    console.error("❌ MongoDB connection error:", err.message)
   );
 
-  if (!user) {
-    return res.status(401).json({ message: "Invalid email or password" });
-  }
+// Mount API routes
+app.use("/api/auth", registerRoutes);  // /api/auth/register
+app.use("/api/auth", loginRoutes);     // /api/auth/login
+app.use("/api/market-data", flattradeRoutes); // /api/market-data/...
 
-  res.status(200).json({ message: "Login successful", user });
-});
-
-// Start the server
+// Start server
 app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
+  console.log(`✅ Server running at http://localhost:${PORT}`);
 });
