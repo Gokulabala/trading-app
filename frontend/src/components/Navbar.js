@@ -19,6 +19,11 @@ const Navbar = () => {
     navigate("/login");
   };
 
+  const handleTabClick = (tab) => {
+    setActiveTab(tab);
+    navigate(`/${tab.toLowerCase()}`);
+  };
+
   return (
     <nav className="bg-[#181818] text-white h-12 flex items-center justify-between px-4 shadow-md text-sm">
       {/* Left Section */}
@@ -44,7 +49,7 @@ const Navbar = () => {
             (item, idx) => (
               <button
                 key={idx}
-                onClick={() => setActiveTab(item)}
+                onClick={() => handleTabClick(item)}
                 className={`transition duration-200 ${
                   activeTab === item
                     ? "text-orange-400 font-semibold"

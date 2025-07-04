@@ -7,6 +7,7 @@ import Dashboard from "./pages/Dashboard";
 import StockDetails from "./pages/StockDetails";
 import Callback from "./pages/Callback";
 import PrivateRoute from "./components/PrivateRoute";
+import Orders from "./pages/Orders";
 
 const App = () => {
   return (
@@ -33,7 +34,14 @@ const App = () => {
           </PrivateRoute>
         }
       />
-
+      <Route
+        path="/orders"
+        element={
+          <PrivateRoute>
+            <Orders />
+          </PrivateRoute>
+        }
+      />
       {/* Redirect unknown routes to login */}
       <Route path="*" element={<Navigate to="/login" replace />} />
     </Routes>
