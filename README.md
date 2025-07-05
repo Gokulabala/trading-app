@@ -1,25 +1,47 @@
-# 📈 Trading App (Zerodha Kite Clone)
+# 💹 Zerodha Kite Clone - Trading Dashboard
 
-A beginner-friendly trading application built with **React.js**, **Node.js**, **MongoDB**, and **JWT Authentication**. This project simulates a stock trading platform where users can view stock data and securely register/login.
+This project is a **Zerodha Kite-style trading dashboard clone** built with **React** and **Tailwind CSS**. It simulates core functionalities such as:
+
+- 🔐 Login & Registration
+- 📊 Dashboard with live stock cards
+- 💼 Orders, Holdings, Positions, Bids, and Funds pages
+- 💸 Buy/Sell order modals with fund validation
+- 🧾 Trade history and localStorage persistence
+- 🌓 Light/Dark theme toggle
+- 💰 Dummy fund injection and reset support
 
 ---
 
 ## 🚀 Features
 
 ### 🔐 Authentication
-- Register new users with hashed passwords
-- Login with JWT-based session handling
-- Persistent user storage in MongoDB
-- Auto-redirect on login/register
-- Secure token-based route protection
+- Secure login & register with private route protection
 
-### 📊 Stock Dashboard
-- Enter stock symbol and view live market data
-- Fetch data using FlatTrade API or mock backend
-- Display price, change %, and more
-- Error handling for invalid or empty responses
+### 📈 Stock Sidebar
+- Scrollable list of dummy stock data
+- Hover shows quick Buy/Sell & other actions
+
+### 🛒 Buy/Sell Modals
+- Center-bottom modal appears when Buy/Sell is clicked
+- Limit checks within ±10% of market price
+- Trade recorded in localStorage and funds deducted
+
+### 💰 Funds Page
+- Shows available margin and cash
+- Add dummy ₹10L funds or reset funds to ₹10L
+- Fund updates reflected in Buy/Sell modals
+
+### 📑 Orders Page
+- Displays trade history from localStorage
+- Empty state shown when no orders placed
+
+### 📊 Holdings / Positions / Bids
+- Styled UI mimicking Zerodha Kite
+- Holdings shown with P&L, day change, etc.
+- Positions & Bids simulated with dummy data
 
 ---
+
 
 ## 🛠️ Tech Stack
 
