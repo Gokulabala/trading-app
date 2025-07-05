@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
+import BuyOrderModal from "./BuyOrderModal";
+import SellOrderModal from "./SellOrderModal";
 
 const dummyStocks = [
   { name: "MARUTI", change: -105, percent: -0.82, price: 12647 },
@@ -13,60 +15,100 @@ const dummyStocks = [
 ];
 
 const Sidebar = () => {
+  const [hoveredStock, setHoveredStock] = useState(null);
+  const [showBuyModal, setShowBuyModal] = useState(false);
+  const [showSellModal, setShowSellModal] = useState(false);
+  const [selectedStock, setSelectedStock] = useState(null);
+
+  const handleBuyClick = (stock) => {
+    setSelectedStock(stock);
+    setShowBuyModal(true);
+    setShowSellModal(false);
+  };
+
+  const handleSellClick = (stock) => {
+    setSelectedStock(stock);
+    setShowSellModal(true);
+    setShowBuyModal(false);
+  };
+
   return (
-    <aside className="w-60 bg-[#121212] text-sm text-white border-r border-gray-800 overflow-y-auto">
-      <div className="px-3 py-3 border-b border-gray-800">
-        <input
-          type="text"
-          placeholder="Search eg: infy, nifty..."
-          className="w-full px-3 py-1 rounded bg-[#1f1f1f] text-white focus:outline-none"
-        />
-      </div>
-
-      <div className="px-3 py-2 border-b border-gray-700 font-semibold text-gray-400">
-        Default (9)
-      </div>
-
-      <ul className="divide-y divide-gray-800">
-        {dummyStocks.map((stock, idx) => (
-          <li key={idx} className="px-4 py-2 hover:bg-[#1c1c1e] cursor-pointer">
-            <div className="flex justify-between font-medium">
-              <span className="text-blue-300">{stock.name}</span>
-              <span
-                className={`${
-                  stock.change >= 0 ? "text-green-400" : "text-red-400"
-                }`}
-              >
-                {stock.price.toFixed(2)}
-              </span>
-            </div>
-            <div className="flex justify-between text-xs text-gray-400 mt-1">
-              <span>
-                {stock.change >= 0 ? "+" : ""}
-                {stock.change}
-              </span>
-              <span>
-                ({stock.percent >= 0 ? "+" : ""}
-                {stock.percent}%)
-              </span>
-            </div>
-          </li>
-        ))}
-      </ul>
-
-      <div className="flex justify-center items-center py-2 border-t border-gray-800 text-xs text-gray-400">
-        <div className="space-x-2">
-          {[1, 2, 3, 4, 5, 6, 7].map((n) => (
-            <button
-              key={n}
-              className="px-2 py-1 hover:bg-gray-700 rounded-full"
-            >
-              {n}
-            </button>
-          ))}
+    <>
+      <aside className="w-60 bg-[#121212] text-sm text-white border-r border-gray-800 overflow-y-auto">
+        <div className="px-3 py-3 border-b border-gray-800">
+          <input
+            type="text"
+            placeholder="Search eg: infy, nifty..."
+            className="w-full px-3 py-1 rounded bg-[#1f1f1f] text-white focus:outline-none"
+          />
         </div>
-      </div>
-    </aside>
+
+        <div className="px-3 py-2 border-b border-gray-700 font-semibold text-gray-400">
+          Default (9)
+        </div>
+
+        <ul className="divide-y divide-gray-800">
+          {dummyStocks.map((stock, idx) => (
+            <li
+              key={idx}
+              onMouseEnter={() => setHoveredStock(stock.name)}
+              onMouseLeave={() => setHoveredStock(null)}
+              className="relative px-4 py-2 hover:bg-[#1c1c1e] cursor-pointer"
+            >
+              <div className="flex justify-between font-medium">
+                <span className="text-blue-300">{stock.name}</span>
+                <span
+                  className={`${
+                    stock.change >= 0 ? "text-green-400" : "text-red-400"
+                  }`}
+                >
+                  {stock.price.toFixed(2)}
+                </span>
+              </div>
+              <div className="flex justify-between text-xs text-gray-400 mt-1">
+                <span>
+                  {stock.change >= 0 ? "+" : ""}
+                  {stock.change}
+                </span>
+                <span>
+                  ({stock.percent >= 0 ? "+" : ""}
+                  {stock.percent}%)
+                </span>
+              </div>
+
+              {/* Hover Actions */}
+              {hoveredStock === stock.name && (
+                <div className="absolute right-2 top-1/2 transform -translate-y-1/2 flex space-x-1">
+                  <button
+                    onClick={() => handleBuyClick(stock)}
+                    className="bg-blue-600 w-6 h-6 text-xs rounded hover:bg-blue-700"
+                  >
+                    B
+                  </button>
+                  <button
+                    onClick={() => handleSellClick(stock)}
+                    className="bg-red-600 w-6 h-6 text-xs rounded hover:bg-red-700"
+                  >
+                    S
+                  </button>
+                  <button className="bg-[#2a2a2e] w-6 h-6 text-xs rounded text-white">
+                    ⋮
+                  </button>
+                </div>
+              )}
+            </li>
+          ))}
+        </ul>
+      </aside>
+
+      {/* Modals */}
+      {showBuyModal && (
+        <BuyOrderModal stock={selectedStock} onClose={() => setShowBuyModal(false)} />
+      )}
+      {showSellModal && (
+        <SellOrderModal stock={selectedStock} onClose={() => setShowSellModal(false)} />
+      )}
+    </>
   );
 };
 
